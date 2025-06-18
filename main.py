@@ -34,7 +34,6 @@ class IssueResponse(BaseModel):
     response: str | Dict[str, Any]
 
 # --- Agent and Tool Configuration (Global Setup) ---
-# It's better to initialize these once if they don't change per request
 # Load configurations from environment variables
 GITHUB_MCP_URL = os.getenv("GITHUB_MCP_URL")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
