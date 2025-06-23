@@ -1,0 +1,27 @@
+# Stage 1: Build React App
+FROM registry.access.redhat.com/ubi8/nodejs-18 as build
+
+WORKDIR /app
+
+# Switch to root for npm install
+USER root
+
+COPY package.json package-lock.json ./
+RUN npm ci --legacy-peer-deps --timeout=60000
+
+COPY . .
+RUN npm run build
+
+# Stage 2: Nginx for static serving (OpenShift compatible)
+FROM registry.access.redhat.com/ubi9/nginx-120
+
+# Copy built app to the correct location
+COPY --from=build /app/dist /opt/app-root/src
+COPY nginx.conf /opt/app-root/etc/nginx/nginx.conf
+
+USER root
+RUN mkdir -p /var/cache/nginx /var/log/nginx /var/run/nginx && \
+    chmod -R g=u /var/cache/nginx /var/log/nginx /var/run/nginx
+
+EXPOSE 8080
+CMD ["nginx", "-g", "daemon off;"]

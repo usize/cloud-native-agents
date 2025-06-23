@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: github-frontend
+  labels:
+    app: github-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: github-frontend
+  template:
+    metadata:
+      labels:
+        app: github-frontend
+    spec:
+      containers:
+      - name: github-frontend
+        image: quay.io/shanand/cloud-native-agents-frontend:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: API_BASE_URL
+          value: "http://github-mcp-server:8003"

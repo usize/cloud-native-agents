@@ -192,3 +192,25 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+# --- Frontend (UI) ignores ---
+UI/node_modules/
+UI/dist/
+UI/.env
+UI/.DS_Store
+UI/.eslintcache
+UI/.prettier*
+UI/.vite/
+UI/coverage/
+UI/*.log
+
+# --- Backend ignores ---
+backend/.env
+backend/.DS_Store
+backend/coverage/
+
+# --- General log files ---
+*.log
+package-lock.json
+.vscode/
+.DS_Store
