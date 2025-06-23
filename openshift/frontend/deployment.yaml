@@ -21,4 +21,14 @@ spec:
         - containerPort: 8080
         env:
         - name: API_BASE_URL
-          value: "http://github-mcp-server:8003"
+          valueFrom:
+            secretKeyRef:
+              name: github-frontend-secrets
+              key: API_BASE_URL
+        volumeMounts:
+        - name: config-volume
+          mountPath: /opt/app-root/src/config
+      volumes:
+      - name: config-volume
+        emptyDir: {}
+

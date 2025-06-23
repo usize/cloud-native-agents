@@ -20,8 +20,13 @@ COPY --from=build /app/dist /opt/app-root/src
 COPY nginx.conf /opt/app-root/etc/nginx/nginx.conf
 
 USER root
+# Copy entrypoint script for runtime config injection
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+
 RUN mkdir -p /var/cache/nginx /var/log/nginx /var/run/nginx && \
     chmod -R g=u /var/cache/nginx /var/log/nginx /var/run/nginx
 
 EXPOSE 8080
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["/entrypoint.sh"]
