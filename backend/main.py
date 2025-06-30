@@ -8,7 +8,7 @@ from typing import Dict, Any
 
 # Autogen imports
 from autogen_ext.models.openai import OpenAIChatCompletionClient
-from autogen_ext.tools.mcp import SseServerParams, SseMcpToolAdapter
+from autogen_ext.tools.mcp import SseServerParams, SseMcpToolAdapter, StreamableHttpServerParams, StreamableHttpMcpToolAdapter
 from autogen_agentchat.agents import AssistantAgent
 from autogen_agentchat.teams import RoundRobinGroupChat
 from autogen_core.tools import FunctionTool
@@ -46,11 +46,14 @@ class IssueResponse(BaseModel):
 # --- Agent and Tool Configuration (Global Setup) ---
 # Load configurations from environment variables
 GITHUB_MCP_URL = os.getenv("GITHUB_MCP_URL")
+GITHUB_PAT = os.getenv("GITHUB_PAT")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 TAVILY_API_KEY = os.getenv("TAVILY_API_KEY")
 
 if not GITHUB_MCP_URL:
     raise ValueError("GITHUB_MCP_URL environment variable not set.")
+if not GITHUB_PAT:
+    raise ValueError("GITHUB_PAT environment variable not set.")
 if not OPENAI_API_KEY:
     raise ValueError("OPENAI_API_KEY environment variable not set.")
 if not TAVILY_API_KEY:
@@ -59,9 +62,12 @@ if not TAVILY_API_KEY:
 # --- Helper Functions ---
 async def setup_agents_and_tools():
     """Setup common agents and tools for both endpoints."""
-    server_params = SseServerParams(
+    server_params = StreamableHttpServerParams(
         url=GITHUB_MCP_URL,
-        headers=None,
+        headers={
+            "Authorization": f"Bearer {GITHUB_PAT}",
+            "Content-Type": "application/json"
+        },
         timeout=10,
         sse_read_timeout=300,
     )
@@ -85,7 +91,7 @@ async def setup_agents_and_tools():
 
     async def get_tool_adapter(tool_name: str):
         """Helper function to get the tool adapter by name."""
-        return await SseMcpToolAdapter.from_server_params(server_params, tool_name)
+        return await StreamableHttpMcpToolAdapter.from_server_params(server_params, tool_name)
 
     tool_adapter_add_issue_comment = await get_tool_adapter("add_issue_comment")
     tool_adapter_get_issue = await get_tool_adapter("get_issue")
