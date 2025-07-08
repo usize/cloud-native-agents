@@ -1,13 +1,13 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: github-frontend
+  name: frontend-v002
   labels:
-    app: github-frontend
+    app: frontend-v002
 spec:
   to:
     kind: Service
-    name: github-frontend
+    name: frontend-v002
   port:
     targetPort: 8080
   tls:

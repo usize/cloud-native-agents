@@ -8,3 +8,5 @@ python-dotenv
 tavily-python
 openai
 websockets
+grpcio>=1.67.0
+grpcio-tools>=1.67.0

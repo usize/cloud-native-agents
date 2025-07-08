@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package issueanalyzer;
+
+service IssueAnalyzer {
+  rpc AnalyzeIssue (AnalyzeIssueRequest) returns (AnalyzeIssueResponse);
+}
+
+message AnalyzeIssueRequest {
+  string issue_link = 1;
+}
+
+message AnalyzeIssueResponse {
+  string response = 1;
+} 
