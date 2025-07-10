@@ -154,6 +154,7 @@ async def analyze_issue_with_hitl_comment(websocket: WebSocket):
             await _send_error_message(f"Error in conversation: {str(e)}")
         finally:
             logger.info("Conversation stream completed")
+            await websocket.close()
     except WebSocketDisconnect:
         logger.info("HITL WebSocket client disconnected")
         websocket_closed = True

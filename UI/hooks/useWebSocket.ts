@@ -135,6 +135,7 @@ export const useWebSocket = (options: UseWebSocketOptions): UseWebSocketReturn =
                setWsError(timeoutError);
                onError?.(timeoutError);
                disconnect();
+               onComplete?.(); 
              }, timeout);
            } else if (message.type === 'error') {
              console.log('Error message received:', message.content);
@@ -174,6 +175,7 @@ export const useWebSocket = (options: UseWebSocketOptions): UseWebSocketReturn =
         onError?.(errorMsg);
         setWsLoading(false);
         setIsConnected(false);
+        onComplete?.(); 
       };
 
       ws.onclose = () => {
@@ -182,6 +184,7 @@ export const useWebSocket = (options: UseWebSocketOptions): UseWebSocketReturn =
         setWsLoading(false);
         clearTimeout();
         onDisconnect?.();
+        onComplete?.(); 
       };
 
       return ws;
