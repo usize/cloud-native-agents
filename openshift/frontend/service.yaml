@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: github-frontend
+  name: frontend-v002
   labels:
-    app: github-frontend
+    app: frontend-v002
 spec:
   selector:
-    app: github-frontend
+    app: frontend-v002
   ports:
     - protocol: TCP
       port: 8080

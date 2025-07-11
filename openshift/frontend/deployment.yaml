@@ -1,29 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: github-frontend
+  name: frontend-v002
   labels:
-    app: github-frontend
+    app: frontend-v002
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: github-frontend
+      app: frontend-v002
   template:
     metadata:
       labels:
-        app: github-frontend
+        app: frontend-v002
     spec:
       containers:
-      - name: github-frontend
-        image: quay.io/shanand/cloud-native-agents-frontend:latest
+      - name: frontend-v002
+        image: quay.io/shanand/cloud-native-agents-frontend:v0.0.2
         ports:
         - containerPort: 8080
         env:
         - name: API_BASE_URL
           valueFrom:
             secretKeyRef:
-              name: github-frontend-secrets
+              name: frontend-v002-secrets
               key: API_BASE_URL
         volumeMounts:
         - name: config-volume
