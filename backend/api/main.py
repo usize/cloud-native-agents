@@ -6,7 +6,7 @@ from datetime import datetime
 
 # Import predefined models and manager
 from backend.core.agents import AgentManager, IssueRequest, IssueResponse
-from backend.memory import conversation_memory
+from backend.core.memory import conversation_memory
 
 # Setup logging
 logger = logging.getLogger(__name__)

@@ -13,7 +13,7 @@ from autogen_agentchat.conditions import TextMentionTermination
 from datetime import datetime
 
 # Import memory functionality
-from backend.memory import conversation_memory
+from backend.core.memory import conversation_memory
 
 # Load environment variables from .env file
 load_dotenv()

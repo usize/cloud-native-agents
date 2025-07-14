@@ -36,13 +36,13 @@ python memory.py display
 python memory.py list
 
 # Create a new collection
-python memory.py create <collection_name>
+CHROMADB_COLLECTION=collection_name python memory.py create
 
 # Delete a collection
-python memory.py delete <collection_name>
+CHROMADB_COLLECTION=collection_name python memory.py delete
 
 # Clear all data in a collection
-python memory.py clear <collection_name>
+CHROMADB_COLLECTION=collection_namepython memory.py clear
 
 # Reload memory connection, update chrombd collection with agent
 python memory.py reload
