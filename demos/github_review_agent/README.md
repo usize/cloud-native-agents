@@ -24,7 +24,7 @@ Platform for creating and deploying single and multi-agent AI systems on Kuberne
 
 #### a. Install dependencies
 ```bash
-cd backend
+cd demos/github_review_agent/backend
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -33,7 +33,7 @@ pip install -r requirements.txt
 #### b. Set environment variables
 See [GitHub MCP Server Setup](https://github.com/github/github-mcp-server) for instructions on deploying your own MCP server.
 
-Create a `.env` file in `backend/` with:
+Create a `.env` file in `demos/github_review_agent/backend/` with:
 ```
 OPENAI_API_KEY=your-openai-key
 TAVILY_API_KEY=your-tavily-key
@@ -49,7 +49,7 @@ uvicorn main:app --reload --host 0.0.0.0 --port 8080
 
 #### a. Install dependencies
 ```bash
-cd UI
+cd demos/github_review_agent/UI
 npm install
 ```
 
