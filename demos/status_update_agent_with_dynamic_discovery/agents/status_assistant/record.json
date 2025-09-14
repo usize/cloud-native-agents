@@ -1,0 +1,19 @@
+{
+  "schema_version": "v0.3.1",
+  "name": "et/status-assistant",
+  "version": "v0.1.0",
+  "description": "Q&A over a flat text status file. Exposed via A2A.",
+  "authors": ["Morgan Foster <mofoster@redhat.com>"],
+  "skills": [
+    {
+      "category_name": "nlp",
+      "category_uid": 1,
+      "class_name": "question_answering",
+      "class_uid": 11405
+    }
+  ],
+  "locators": [
+    { "type": "agent-as-a-service", "url": "http://localhost:8000", "annotations": { "protocol": "a2a" } },
+  ]
+}
+

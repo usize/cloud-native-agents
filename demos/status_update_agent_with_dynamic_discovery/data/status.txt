@@ -1,0 +1,12 @@
+09-15-2025
+
+I'm wiring up a DIR+ACP demo for dynamic agent discovery.
+
+09-12-2025
+
+This week I met with folks from the ET team at Red Hat and started working on
+some proof of concept work in the space of AI agent design.
+
+08-25-2025
+
+I started my job at Red Hat. My main focus is getting up to speed, doing trainings, etc...
